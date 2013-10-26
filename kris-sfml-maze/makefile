@@ -1,8 +1,8 @@
 CC=clang++
-CFLAGS=-std=c++11 -g -Weverything
+CFLAGS=-std=c++11 -g -Weverything -Wno-padded -Wno-switch-enum
 IMPORTS=-lsfml-graphics -lsfml-window -lsfml-system
 
-SRC=Game.cpp Render.cpp
+SRC=Game.cpp
 EXE=Game-App
 
 all: execute

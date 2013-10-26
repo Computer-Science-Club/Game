@@ -2,15 +2,15 @@
 #include <iostream>
 
 #include "Structures.cpp"
-#include "Render.h"
+#include "Render.cpp"
 #include "Map.cpp"
 
 int main()
 {
     Render mapView;
 
-    int x = 1;
-    int y = 1;
+    short x = 1;
+    short y = 1;
 
     View v;
 
@@ -28,8 +28,8 @@ int main()
 
     mapView.load("tilemap.png", sf::Vector2u(32, 32), v.current, 5,  5);
 
-    int newX;
-    int newY;
+    short newX;
+    short newY;
 
     while(window.isOpen())
     {

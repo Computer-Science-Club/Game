@@ -13,7 +13,7 @@ bool Render::load(const std::string& tileset, sf::Vector2u tileSize, const char*
     m_vertices.setPrimitiveType(sf::Quads);
     m_vertices.resize(width * height * 4);
 
-    int tileNumber;
+    int tileNumber = 0;
 
     for (unsigned int i = 0; i < width; ++i)
     {
@@ -51,8 +51,8 @@ bool Render::load(const std::string& tileset, sf::Vector2u tileSize, const char*
                     break;
             }
 
-            int tu = tileNumber % (m_tileset.getSize().x / tileSize.x);
-            int tv = tileNumber / (m_tileset.getSize().x / tileSize.x);
+            unsigned int tu = (unsigned) tileNumber % (m_tileset.getSize().x / tileSize.x);
+            unsigned int tv = (unsigned) tileNumber / (m_tileset.getSize().x / tileSize.x);
 
             sf::Vertex* quad = &m_vertices[(i + j * width) * 4];
 
