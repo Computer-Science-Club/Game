@@ -14,6 +14,12 @@ They could be represented as structures or simple classes.
 Keeping the information packed nicely together.
 And keeping fuctionality seperate from event handler/renderer
 
+##Entity Types
+There are
+* Level Entities
+* Interactive Entities
+* Particle Entities
+
 ##Map Entities being Structure
 Since walls and lakes don't move, and don't interact.
 Preventing them from having logic keeps code shorter and simpler.
