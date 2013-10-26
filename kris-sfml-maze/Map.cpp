@@ -12,27 +12,6 @@ class Map
 		View view;
 
 	public:
-
-		char temp[256] =
-		{
-			'W','W','W','V','W','W','W','W','W','W','W','W','W','W','W','W',
-			'W','c','W','V','W','B',' ',' ',' ','W',' ',' ',' ',' ',' ','W',
-			'W',' ','W','V','W','B','W','W',' ','W',' ','W','W','W',' ','W',
-			'W',' ','W','V','W','B','W',' ',' ','W',' ','W','V','W',' ','W',
-			'W',' ','W','W','W','B','W',' ','W','W',' ','W','V','W',' ','W',
-			'W',' ',' ',' ',' ','B','W',' ','W','W',' ','W','W','W',' ','W',
-			'W','W','W',' ','W','W','W',' ','W','W',' ',' ',' ','W',' ','W',
-			'W',' ',' ',' ',' ',' ','W',' ','W','W','W','W',' ','W',' ','W',
-			'W',' ','W','W','W',' ','W',' ',' ',' ',' ',' ',' ','W',' ','W',
-			'W',' ','W','V','W',' ','W','W','W','W','W','W',' ','W',' ','W',
-			'W',' ','W','V','W',' ',' ',' ',' ','W','V','W',' ','W',' ','W',
-			'W',' ','W','V','W','W','W','W',' ','W','V','W',' ','W',' ','W',
-			'W',' ','W','V','V','V','V','W',' ','W','V','W',' ','W',' ','W',
-			'W',' ','W','W','W','W','V','W',' ','W','W','W',' ','W',' ','W',
-			'W',' ',' ',' ',' ','W','V','W',' ',' ',' ',' ',' ','W',' ','W',
-			'W','W','W','W','W','W','V','W','W','W','W','W','W','W','W','W'
-		};
-
 		/*!
 		 * empty default constructor
 		 */
@@ -47,6 +26,26 @@ class Map
 			currentLevel.width = 16;
 			currentLevel.map = new char[currentLevel.height * currentLevel.width];
 
+			char temp[256] =
+			{
+				'W','W','W','V','W','W','W','W','W','W','W','W','W','W','W','W',
+				'W','c','W','V','W','B',' ',' ',' ','W',' ',' ',' ',' ',' ','W',
+				'W',' ','W','V','W','B','W','W',' ','W',' ','W','W','W',' ','W',
+				'W',' ','W','V','W','B','W',' ',' ','W',' ','W','V','W',' ','W',
+				'W',' ','W','W','W','B','W',' ','W','W',' ','W','V','W',' ','W',
+				'W',' ',' ',' ',' ','B','W',' ','W','W',' ','W','W','W',' ','W',
+				'W','W','W',' ','W','W','W',' ','W','W',' ',' ',' ','W',' ','W',
+				'W',' ',' ',' ',' ',' ','W',' ','W','W','W','W',' ','W',' ','W',
+				'W',' ','W','W','W',' ','W',' ',' ',' ',' ',' ',' ','W',' ','W',
+				'W',' ','W','V','W',' ','W','W','W','W','W','W',' ','W',' ','W',
+				'W',' ','W','V','W',' ',' ',' ',' ','W','V','W',' ','W',' ','W',
+				'W',' ','W','V','W','W','W','W',' ','W','V','W',' ','W',' ','W',
+				'W',' ','W','V','V','V','V','W',' ','W','V','W',' ','W',' ','W',
+				'W',' ','W','W','W','W','V','W',' ','W','W','W',' ','W',' ','W',
+				'W',' ',' ',' ',' ','W','V','W',' ',' ',' ',' ',' ','W',' ','W',
+				'W','W','W','W','W','W','V','W','W','W','W','W','W','W','W','W'
+			};
+
 			//fills the map object with values
 			for (short index = 0; index < (currentLevel.height * currentLevel.width); index++)
 			{
@@ -58,16 +57,6 @@ class Map
 
 		void setView(View v)
 		{
-			currentLevel.height = 16;
-			currentLevel.width = 16;
-			currentLevel.map = new char[currentLevel.height * currentLevel.width];
-
-			//fills the map object with values
-			for (short index = 0; index < (currentLevel.height * currentLevel.width); index++)
-			{
-				currentLevel.map[index] = temp[index];
-			}
-
 			view = v;
 		}
 
@@ -87,7 +76,7 @@ class Map
 				//otherwise get the value of the space from the map
 				else
 				{
-					array[index] = temp[(x + (y * currentLevel.width)) + (index % view.width) + (index / view.width * currentLevel.width)];
+					array[index] = currentLevel.map[(x + (y * currentLevel.width)) + (index % view.width) + (index / view.width * currentLevel.width)];
 				}
 			}
 		}
@@ -97,16 +86,7 @@ class Map
 		 */
 		bool spaceIsOpen(short x, short y)
 		{
-			if (outOfBounds(x,y) || temp[ x + (y * currentLevel.width) ] != ' ')
-			{
-				//out of bounds
-				return false;
-			}
-			else
-			{
-				//check if that type of space is open
-				return true;
-			}
+			return !outOfBounds(x,y) && spaceTypeOpen(currentLevel.map[ x + (y * currentLevel.width) ]);
 		}
 
 		/*!
@@ -136,6 +116,6 @@ class Map
 		 */
 		void setTile(char value, short x, short y)
 		{
-			temp[x + (y * currentLevel.width) ] = value;
+			currentLevel.map[x + (y * currentLevel.width) ] = value;
 		}
 };

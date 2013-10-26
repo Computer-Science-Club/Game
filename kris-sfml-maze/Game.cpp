@@ -5,31 +5,15 @@
 #include "Render.h"
 #include "Map.cpp"
 
-Render mapView;
-
-int x = 1;
-int y = 1;
-
-View v;
-
-Map worldMap;
-
-char camera[25];
-
-int updateCamera()
-{
-    worldMap.getView(camera, x - 2, y - 2);
-
-    if(!mapView.load("tilemap.png", sf::Vector2u(32, 32), camera, 5,  5))
-    {
-        return -1;
-    }
-
-    return 1;
-}
-
 int main()
 {
+    Render mapView;
+
+    int x = 1;
+    int y = 1;
+
+    View v;
+
     sf::RenderWindow window(sf::VideoMode(160, 160), "Tilemap");
     window.setVerticalSyncEnabled(true);
 
@@ -37,13 +21,12 @@ int main()
     v.width = 5;
 
     v.current = new char[v.height * v.width];
-    v.previous = new char[v.height * v.width];
 
-    worldMap.setView(v);
+    Map * worldMap = new Map(v);
     
-    worldMap.getView(camera, x, y);
+    worldMap -> getView(v.current, x - 2, y - 2);
 
-    updateCamera();
+    mapView.load("tilemap.png", sf::Vector2u(32, 32), v.current, 5,  5);
 
     int newX;
     int newY;
@@ -75,7 +58,7 @@ int main()
                 case sf::Event::KeyPressed:
 
                     
-                    worldMap.setTile(' ', x, y);
+                    worldMap -> setTile(' ', x, y);
 
                     switch(event.key.code)
                     {
@@ -104,16 +87,17 @@ int main()
                             break;
                     }
 
-                    if(worldMap.spaceIsOpen(newX, newY))
+                    if(worldMap -> spaceIsOpen(newX, newY))
                     {
                         x = newX;
                         y = newY;
-                        worldMap.setTile('c', newX, newY);
+                        worldMap -> setTile('c', newX, newY);
                     } else {
-                        worldMap.setTile('c', x, y);
+                        worldMap -> setTile('c', x, y);
                     }
 
-                    updateCamera();
+                    worldMap -> getView(v.current, x - 2, y - 2);
+                    mapView.load("tilemap.png", sf::Vector2u(32, 32), v.current, 5,  5);
 
                     break;
 
