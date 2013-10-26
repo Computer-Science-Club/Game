@@ -84,7 +84,7 @@ class Map
 		/*!
 		 * @brief check if an x,y coordinate is open for a user to enter
 		 */
-		bool spaceIsOpen(short x, short y)
+		bool const spaceIsOpen(short x, short y)
 		{
 			return !outOfBounds(x,y) && spaceTypeOpen(currentLevel.map[ x + (y * currentLevel.width) ]);
 		}
@@ -92,7 +92,7 @@ class Map
 		/*!
 		 * @brief Checks if a type of space is open
 		 */
-		bool spaceTypeOpen(char type)
+		bool const spaceTypeOpen(char type)
 		{
 			switch(type)
 			{
@@ -106,7 +106,7 @@ class Map
 		/*!
 		 * @brief checks if an x,y coord is outside of the array bounds
 		 */
-		bool outOfBounds(short x, short y)
+		bool const outOfBounds(short x, short y)
 		{
 			return x < 0 || x >= currentLevel.width || y < 0 || y >= currentLevel.height;
 		}
