@@ -17,6 +17,7 @@ sudo apt-get install libopenal-dev
 sudo apt-get install libjpeg62
 sudo apt-get install cmake
 sudo apt-get install g++
+sudo apt-get install clang
 
 echo Starting SFML 2.0 install
 echo building make for dynamic release

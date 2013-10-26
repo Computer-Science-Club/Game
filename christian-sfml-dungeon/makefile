@@ -1,8 +1,8 @@
 CC=clang++
-CFLAGS=-std=c++11 -g -Weverything
+CFLAGS=-std=c++11 -g -Weverything -Werror
 IMPORTS=-lsfml-graphics -lsfml-window -lsfml-system
 
-SRC=Game.cpp Render.cpp
+SRC=Map.cpp
 EXE=Game-App
 
 all: execute
