@@ -61,3 +61,6 @@ echo Complete
 echo Installing
 sudo make install >> install.log
 echo Complete
+
+cd ..
+rm -r LaurentGomila-SFML-56c2eb8
